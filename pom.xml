@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2015. Traveliko
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.traveliko</groupId>
+    <artifactId>yieldplanet-cxf-client</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Yieldplanet CXF Client (JAR)</name>
+    <inceptionYear>2013</inceptionYear>
+    <organization>
+        <name>TRAVELIKO SINGAPORE PTE.LTD.</name>
+        <url>http://www.traveliko.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>1</id>
+            <name>Bjorn Harvold</name>
+            <email>bjorn.harvold@traveliko.com</email>
+            <url>http://www.traveliko.com</url>
+            <organization>TRAVELIKO SINGAPORE PTE.LTD.</organization>
+            <roles>
+                <role>CTO</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://bitbucket.org/travelikodevelopment/yieldplanet-cxf-client.git</connection>
+        <developerConnection>scm:git:https://bitbucket.org/travelikodevelopment/yieldplanet-cxf-client.git</developerConnection>
+        <url>https://bitbucket.org/travelikodevelopment/yieldplanet-cxf-client.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <parent>
+        <groupId>com.traveliko</groupId>
+        <artifactId>traveliko-external-bom</artifactId>
+        <version>3.0.48</version>
+        <relativePath/>
+    </parent>
+
+    <build>
+        <!--
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/wsdl</directory>
+            </resource>
+        </resources>
+		-->
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>2.4.1</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+							<extension>true</extension>
+							<xjcArgs>
+	                            <xjcArg>-XautoNameResolution</xjcArg>
+	                        </xjcArgs>
+                            <genJWS>false</genJWS>
+							<packageName>com.traveliko.platform.ws.yieldplanet</packageName>
+                            <wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory>
+                            <wsdlFiles>
+                                <wsdlFile>yieldplanet.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <wsdlLocation>classpath:wsdl/yieldplanet.wsdl</wsdlLocation>
+							<vmArgs>
+								<vmArg>-Djavax.xml.accessExternalDTD=all</vmArg>
+						        <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+						    </vmArgs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+    <dependencies>
+
+        <!-- Apache CXF -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-ws-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-ws-policy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <repositories>
+        <!-- Traveliko release repository -->
+        <repository>
+            <id>traveliko-releases</id>
+            <name>Traveliko Release Repository</name>
+            <url>http://travelikomavenrepo-sg.s3-website-ap-southeast-1.amazonaws.com/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <!-- Traveliko Snapshot repository -->
+        <repository>
+            <id>traveliko-snapshots</id>
+            <name>Traveliko Snapshot Repository</name>
+            <url>http://travelikomavenrepo-sg.s3-website-ap-southeast-1.amazonaws.com/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+    </repositories>
+</project>
