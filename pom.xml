@@ -71,7 +71,7 @@
 							<xjcArgs>
 	                            <xjcArg>-XautoNameResolution</xjcArg>
 	                        </xjcArgs>
-                            <genJWS>false</genJWS>
+                            <genJWS>true</genJWS>
 							<packageName>com.traveliko.platform.ws.yieldplanet</packageName>
                             <wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory>
                             <wsdlFiles>
