@@ -4,7 +4,7 @@
 # Copyright (c) 2023. wink.travel. All rights Reserved.
 #
 
-echo "Releasing siteminder-channel-manager-web-services-client..."
+echo "Releasing yield-planet-channel-manager-web-services-client..."
 
 echo "Cleaning artifacts..."
 mvn clean
