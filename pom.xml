@@ -5,23 +5,23 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.traveliko</groupId>
-    <artifactId>yieldplanet-cxf-client</artifactId>
+    <groupId>travel.wink</groupId>
+    <artifactId>yield-planet-channel-manager-ws-soap-client-java</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
-    <name>Yieldplanet CXF Client (JAR)</name>
+    <version>5.0.0-SNAPSHOT</version>
+    <name>Siteminder Web Services Client</name>
     <inceptionYear>2013</inceptionYear>
     <organization>
         <name>TRAVELIKO SINGAPORE PTE.LTD.</name>
-        <url>http://www.traveliko.com</url>
+        <url>https://wink.travel</url>
     </organization>
 
     <developers>
         <developer>
             <id>1</id>
             <name>Bjorn Harvold</name>
-            <email>bjorn.harvold@traveliko.com</email>
-            <url>http://www.traveliko.com</url>
+            <email>bjorn@wink.travel</email>
+            <url>https://wink.travel</url>
             <organization>TRAVELIKO SINGAPORE PTE.LTD.</organization>
             <roles>
                 <role>CTO</role>
@@ -30,35 +30,77 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://bitbucket.org/travelikodevelopment/yieldplanet-cxf-client.git</connection>
-        <developerConnection>scm:git:https://bitbucket.org/travelikodevelopment/yieldplanet-cxf-client.git</developerConnection>
-        <url>https://bitbucket.org/travelikodevelopment/yieldplanet-cxf-client.git</url>
+        <connection>scm:git:ssh://github.com:wink-travel/yield-planet-channel-manager-ws-soap-client-java.git</connection>
+        <developerConnection>scm:git:ssh://github.com:wink-travel/yield-planet-channel-manager-ws-soap-client-java.git</developerConnection>
+        <url>https://github.com/wink-travel/yield-planet-channel-manager-ws-soap-client-java</url>
         <tag>HEAD</tag>
     </scm>
 
-    <parent>
-        <groupId>com.traveliko</groupId>
-        <artifactId>traveliko-external-bom</artifactId>
-        <version>3.0.48</version>
-        <relativePath/>
-    </parent>
+    <properties>
+        <java.version>17</java.version>
+        <apache.cxf.version>4.0.0</apache.cxf.version>
+        <buildnumber.maven.plugin.version>3.0.0</buildnumber.maven.plugin.version>
+        <conventional-commits-maven-plugin.version>1.92</conventional-commits-maven-plugin.version>
+        <ehcache.version>3.10.8</ehcache.version>
+        <git.commit.plugin.version>5.0.0</git.commit.plugin.version>
+        <gitflow.maven.plugin>1.19.0</gitflow.maven.plugin>
+        <github.release.maven.plugin.version>1.0.4</github.release.maven.plugin.version>
+        <jakarta.jaxb.version>4.0.2</jakarta.jaxb.version>
+        <jakarta.xml.bind.version>4.0.0</jakarta.xml.bind.version>
+        <jaxws.maven.version>4.0.1</jaxws.maven.version>
+        <maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
+        <maven.gpg.version>3.0.1</maven.gpg.version>
+        <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+        <maven.javadoc.plugin.version>3.3.1</maven.javadoc.plugin.version>
+        <maven.release.plugin.version>3.0.0</maven.release.plugin.version>
+        <maven.scm.plugin.version>1.12.0</maven.scm.plugin.version>
+        <nexus.staging.maven.plugin>1.6.13</nexus.staging.maven.plugin>
+        <sonatypeOssDistMgmtSnapshotsUrl>https://s01.oss.sonatype.org/</sonatypeOssDistMgmtSnapshotsUrl>
+        <source.encoding>UTF-8</source.encoding>
+        <versions.maven.plugin>2.8.1</versions.maven.plugin>
+    </properties>
 
     <build>
-        <!--
-        <resources>
-            <resource>
-                <filtering>false</filtering>
-                <directory>src/wsdl</directory>
-            </resource>
-        </resources>
-		-->
-
         <plugins>
 
+            <!-- Old javax plugin for reference in case you cannot use Jakarta EE -->
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>jaxws-maven-plugin</artifactId>-->
+<!--                <version>2.4.1</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>generate-sources</id>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>wsimport</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <extension>true</extension>-->
+<!--                            <xjcArgs>-->
+<!--                                <xjcArg>-XautoNameResolution</xjcArg>-->
+<!--                            </xjcArgs>-->
+<!--                            <genJWS>false</genJWS>-->
+<!--                            <packageName>com.traveliko.platform.ws.yieldplanet</packageName>-->
+<!--                            <wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory>-->
+<!--                            <wsdlFiles>-->
+<!--                                <wsdlFile>yieldplanet.wsdl</wsdlFile>-->
+<!--                            </wsdlFiles>-->
+<!--                            <wsdlLocation>classpath:wsdl/yieldplanet.wsdl</wsdlLocation>-->
+<!--                            <vmArgs>-->
+<!--                                <vmArg>-Djavax.xml.accessExternalDTD=all</vmArg>-->
+<!--                                <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>-->
+<!--                            </vmArgs>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <groupId>com.sun.xml.ws</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
-                <version>2.4.1</version>
+                <version>${jaxws.maven.version}</version>
                 <executions>
                     <execution>
                         <id>generate-sources</id>
@@ -67,31 +109,260 @@
                             <goal>wsimport</goal>
                         </goals>
                         <configuration>
-							<extension>true</extension>
-							<xjcArgs>
-	                            <xjcArg>-XautoNameResolution</xjcArg>
-	                        </xjcArgs>
+                            <xjcArgs>
+                                <xjcArg>-XautoNameResolution</xjcArg>
+                            </xjcArgs>
                             <genJWS>false</genJWS>
-							<packageName>com.traveliko.platform.ws.yieldplanet</packageName>
+                            <packageName>travel.wink.ws.yieldplanet</packageName>
                             <wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory>
                             <wsdlFiles>
                                 <wsdlFile>yieldplanet.wsdl</wsdlFile>
                             </wsdlFiles>
                             <wsdlLocation>classpath:wsdl/yieldplanet.wsdl</wsdlLocation>
-							<vmArgs>
-								<vmArg>-Djavax.xml.accessExternalDTD=all</vmArg>
-						        <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
-						    </vmArgs>
+                            <vmArgs>
+                                <vmArg>-Djakarta.xml.accessExternalDTD=all</vmArg>
+                                <vmArg>-Djakarta.xml.accessExternalSchema=all</vmArg>
+                            </vmArgs>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>se.bjurr.gitchangelog</groupId>
+                <artifactId>git-changelog-maven-plugin</artifactId>
+                <version>${conventional-commits-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>GenerateGitChangelog</id>
+                        <phase>none</phase>
+                        <goals>
+                            <goal>git-changelog</goal>
+                        </goals>
+                        <configuration>
+                            <templateContent>
+                                <![CDATA[
+:<emoji>: <type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+         ]]>
+                            </templateContent>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>${maven.scm.plugin.version}</version>
+                <configuration>
+                    <connectionType>developerConnection</connectionType>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>${git.commit.plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven.deploy.plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>${nexus.staging.maven.plugin}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>${sonatypeOssDistMgmtSnapshotsUrl}</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven.release.plugin.version}</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <useReleaseProfile>true</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <goals>deploy</goals>
+                    <connectionUrl>${project.scm.developerConnection}</connectionUrl>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>${gitflow.maven.plugin}</version>
+                <configuration>
+                    <allowSnapshots>true</allowSnapshots>
+                    <fetchRemote>false</fetchRemote>
+                    <skipFeatureVersion>true</skipFeatureVersion>
+                    <skipUpdateVersion>false</skipUpdateVersion>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions.maven.plugin}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>${buildnumber.maven.plugin.version}</version>
+                <configuration>
+                    <shortRevisionLength>7</shortRevisionLength>
+                    <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <format>{0,date,yyyyMMdd-HHmmss}-{1}</format>
+                    <items>
+                        <item>timestamp</item>
+                        <item>scmVersion</item>
+                    </items>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${source.encoding}</encoding>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <failOnError>false</failOnError>
+                    <failOnWarnings>false</failOnWarnings>
+                </configuration>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>generate-javadoc-json</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>javadoc-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven.resources.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/generated-docs</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.ragedunicorn.tools.maven</groupId>
+                <artifactId>github-release-maven-plugin</artifactId>
+                <version>${github.release.maven.plugin.version}</version>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <configuration>
+                            <owner>wink-travel</owner>
+                            <repository>monorepo-java</repository>
+                            <server>github-oauth</server>
+                            <targetCommitish>master</targetCommitish>
+                            <tagName>${project.version}</tagName>
+                            <body>See CHANGELOG.md for release notes</body>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven.gpg.version}</version>
+            </plugin>
         </plugins>
 
     </build>
 
     <dependencies>
+        <!-- Jakarta EE-->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>${jakarta.xml.bind.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jakarta.jaxb.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.glassfish.jaxb</groupId>
+                    <artifactId>jaxb-runtime</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <!-- Apache CXF -->
         <dependency>
@@ -105,6 +376,16 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.ehcache</groupId>
+                    <artifactId>ehcache</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -117,32 +398,36 @@
 
     </dependencies>
 
-    <repositories>
-        <!-- Traveliko release repository -->
-        <repository>
-            <id>traveliko-releases</id>
-            <name>Traveliko Release Repository</name>
-            <url>http://travelikomavenrepo-sg.s3-website-ap-southeast-1.amazonaws.com/releases</url>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>${sonatypeOssDistMgmtSnapshotsUrl}content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-bom</artifactId>
+                <version>${apache.cxf.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
             <releases>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </releases>
             <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-
-        <!-- Traveliko Snapshot repository -->
-        <repository>
-            <id>traveliko-snapshots</id>
-            <name>Traveliko Snapshot Repository</name>
-            <url>http://travelikomavenrepo-sg.s3-website-ap-southeast-1.amazonaws.com/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
-
-    </repositories>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
