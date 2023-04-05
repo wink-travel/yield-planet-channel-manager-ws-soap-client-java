@@ -13,7 +13,7 @@
     <groupId>travel.wink</groupId>
     <artifactId>yield-planet-channel-manager-ws-soap-client-java</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.1</version>
     <name>Siteminder Web Services Client</name>
     <inceptionYear>2013</inceptionYear>
     <organization>
